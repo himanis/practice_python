@@ -1,1 +1,1 @@
-print "Hello I am test module."
+print "Hello I am test module 2."
