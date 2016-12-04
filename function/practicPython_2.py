@@ -2,6 +2,10 @@ import sys
 import random
 import re
 import string
+from faker import Factory
+import socket
+import struct
+from IPy import IP
 
 def getint():
     while True:
@@ -77,34 +81,18 @@ def passwd_gen():
     print '{:5}{:<40}'.format("", pw)
     return
 
+def gen_ipaddree():
+    print " \n first 5 ip's are created by faker"
+    fake = Factory.create()
+    for i in range(4):
+        print fake.ipv4(network=False)
+    print " next 5 ip is from socket"
+    for i in range(5):
+        print socket.inet_ntoa(struct.pack('>I', random.randint(1,0xffffffff)))
+    print " Next five are with simply join"
+    print ".".join(str (random.randint(1,254) ) for i in range(4))
+    return
 
-if __name__== "__main__":
-    choice = ''
 
-    while choice != 'q':
-        print '{:5}{:<40}'.format("","Please select the test to run")
-        print '{:5}{:<40}'.format("", "q. Please select q to quit")
-        print '{:5}{:<40}'.format("","1. Find a prime number")
-        print '{:5}{:<40}'.format("","2. Fobanacci series")
-        print '{:5}{:<40}'.format("","3. remove the duplicate element in list")
-        print '{:5}{:<40}'.format("","4. remove the duplicate element using set")
-        print '{:5}{:<40}'.format("","5. reverse a string")
-        print '{:5}{:<40}'.format("","6. password Genration")
-        choice = raw_input("please enter choice ")
-        if choice.lower() == 'q':
-            break
-        elif (choice == '1'):
-            check_number_is_prime(choice)
-        elif (choice=='2'):
-            Fibonacci()
-        elif (choice=='3'):
-            remove_duplicate_in_list()
-        elif (choice=='4'):
-            remove_duplicate_inlist_using_set()
-        elif (choice=='5'):
-            string_in_reverse()
-        elif (choice=='6'):
-            passwd_gen()
-        else:
-            print "wrong choice"
+
 
