@@ -8,6 +8,7 @@ from bs4 import BeautifulSoup
 import xml.etree.ElementTree as ET
 import json
 import socket
+import httplib
 #from practic_python.Config import *
 
 
@@ -199,3 +200,14 @@ class WebFun():
         return
 
 
+
+    def http_connect(self):
+        conn = httplib.HTTPConnection('www.google.com',80)
+        url = '/index.html'
+        conn.request("GET", url)
+        resp = conn.getresponse()
+        print resp.getheaders()
+        print resp.getheader('location')
+
+
+        return

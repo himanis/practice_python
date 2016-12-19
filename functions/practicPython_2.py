@@ -7,6 +7,7 @@ import socket
 import struct
 from IPy import IP
 import pdb
+from netaddr.ip import IPAddress
 
 
 class SmallFun():
@@ -22,12 +23,6 @@ class SmallFun():
                 continue
             else:
                 return numI
-
-    def make_a_choice(self,a):
-        return{
-            '1':self.check_number_is_prime()
-         }.get(a,'q')
-        return
 
     def check_number_is_prime(self,c):
         while c != "n":
@@ -76,11 +71,20 @@ class SmallFun():
         print "New list is" ,list(set(l))
         return
 
-    def string_in_reverse(self):
+    def reverse_a_string_words(self):
         str1 = raw_input("string to reverse ")
         str1 = str1.split()
         str1.reverse()
         str1 = " ".join(str1)
+        print str1
+        return
+
+    def reverse_a_string(self):
+        str1 = raw_input(" Enter a string to reverse ")
+        str2 =[]
+        for i in range(len(str1) - 1, 0, -1):
+            str2.append(str1[i])
+        str1 = ''.join(i for i in str2)
         print str1
         return
 
@@ -89,18 +93,54 @@ class SmallFun():
         type= [string.uppercase,string.lowercase,string.digits,'~!@#$%^&*_?']
         pw = ''.join(random.choice(type[random.randint(0, 3)]) for i in range (16))
         print '{:5}{:<40}'.format("", pw)
+
         return
 
     def gen_ipaddree(self):
         print " \n first 5 ip's are created by faker"
+        IP_addr = []
         fake = Factory.create()
         for i in range(4):
-            print fake.ipv4(network=False)
+             IP_addr.append(fake.ipv4(network=False))
+
         print " next 5 ip is from socket"
         for i in range(5):
-            print socket.inet_ntoa(struct.pack('>I', random.randint(1,0xffffffff)))
+            IP_addr.append(socket.inet_ntoa(struct.pack('>I', random.randint(1,0xffffffff) ) ) )
         print " Next five are with simply join"
-        print ".".join(str (random.randint(1,254) ) for i in range(4))
+        for i in range(5):
+             temp =".".join(str (random.randint(1,254) ) for i in range(4))
+             IP_addr.append(temp)
+        return IP_addr
+
+    def gen_ipv6add(self):
+        IPv6_addr = []
+        M = 16 ** 4
+        for i in range(5):
+            IPv6_addr.append("2001:ca11:" + ":".join("%x" % random.randint(0, M) for i in range(6)))
+        return
+
+    def is_valid_IPv4_address(self,add):
+         if add.count('.') == 3:
+             try:
+                 IP(add)
+             except ValueError:
+                 return False
+         else:
+             return False
+         return True
+
+    def is_ip_valid(self):
+        print  "{:40}".format("Using gen_ipaddress to generate IPv4 and IPv5")
+        ipList = self.gen_ipaddree()
+        ipList.append('a.1.1.1')
+        print ipList
+        for i in ipList:
+            if self.is_valid_IPv4_address(i):
+                print "Vaild IP", i
+            else:
+                print "removeing", i
+                ipList.remove(i)
+        print ipList
         return
 
 

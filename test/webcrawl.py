@@ -2,22 +2,27 @@ import sys
 sys.path.append('C:\\Users\\himan\\Documents\\Himani-Data\\Git-Working\\practice_python')
 from functions.Web_related_functions import *
 
+def Display():
+        print '{:5}{:<40}'.format("", "Please select the test to run")
+        print '{:5}{:<40}'.format("", "q. Please select q to quit")
+        print '{:5}{:<40}'.format("", "1. Use the BeautifulSoup and request Python packages to print out"
+                                      " a list of all the article titles on the New York Times homepage.")
+        print '{:5}{:<40}'.format("", "2. Print the heading from New York Times page using Beautiful soup and urllib")
+        print '{:5}{:<40}'.format("", "3. website article on the screen")
+        print '{:5}{:<40}'.format("", "4. Print URL from the page")
+        print '{:5}{:<40}'.format("", "5. print URL with reguler express")
+        print '{:5}{:<40}'.format("", "6. read an xml file ")
+        print '{:5}{:<40}'.format("", "7. read an xml file with tags ")
+        print '{:5}{:<40}'.format('', '8. Json example')
+        print '{:5}{:<40}'.format('', '9. host connection with HTTPlib')
+        return
 
-if __name__== "__main__":
+def MakeAChoice():
+
     choice = ''
     webFun_Ins = WebFun()
     while choice != 'q':
-        print '{:5}{:<40}'.format("","Please select the test to run")
-        print '{:5}{:<40}'.format("", "q. Please select q to quit")
-        print '{:5}{:<40}'.format("","1. Use the BeautifulSoup and request Python packages to print out"
-                                     " a list of all the article titles on the New York Times homepage.")
-        print '{:5}{:<40}'.format("","2. Print the heading from New York Times page using Beautiful soup and urllib")
-        print '{:5}{:<40}'.format("","3. website article on the screen")
-        print '{:5}{:<40}'.format("","4. Print URL from the page")
-        print '{:5}{:<40}'.format("","5. print URL with reguler express")
-        print '{:5}{:<40}'.format("","6. read an xml file ")
-        print '{:5}{:<40}'.format("", "7. read an xml file with tags ")
-        print '{:5}{:<40}'.format('','8. Json example')
+        Display()
         choice = raw_input("please enter choice ")
         if choice.lower() == 'q':
             break
@@ -45,5 +50,11 @@ if __name__== "__main__":
         elif (choice == '8'):
             webFun_Ins.travel_json()
             break
+        elif (choice == '9'):
+            webFun_Ins.http_connect()
+            break
         else:
             print "wrong choice"
+
+if __name__== "__main__":
+    MakeAChoice()
