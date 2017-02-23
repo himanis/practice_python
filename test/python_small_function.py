@@ -14,6 +14,7 @@ def display():
         print '{:5}{:<40}'.format("", "7. check_ip_valid")
         print '{:5}{:<40}'.format("", "8. Generate IP's")
         print '{:5}{:<40}'.format("", "9. password Genration")
+        print '{:5}{:<40}'.format("", "10. anything)
         return raw_input("please enter choice ")
 
 def makechioce():
@@ -42,6 +43,8 @@ def makechioce():
             print IP_list
         elif (choice == '9'):
             smallfun_inst.passwd_gen()
+        elif (choice =='10'):
+            anything()
         else:
             print "wrong choice"
     return

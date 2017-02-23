@@ -9,7 +9,8 @@ import xml.etree.ElementTree as ET
 import json
 import socket
 import httplib
-#from practic_python.Config import *
+import Config
+
 
 
 
